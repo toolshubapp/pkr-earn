@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PKR Earn — Invest, Invite, Grow</title>
+  <meta name="description" content="PKR Earn — Invest, Invite, Grow. Earn PKR by investing in plans, inviting your network, and growing a binary team tree." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#11224E',
+            accent: '#F87B1B',
+            sage: '#CBD99B',
+            light: '#EEEEEE',
+          },
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          boxShadow: {
+            smooth: '0 10px 30px rgba(17,34,78,0.15)',
+            glow: '0 0 0 4px rgba(248,123,27,0.15)',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --primary:#11224E;
+      --accent:#F87B1B;
+      --sage:#CBD99B;
+      --light:#EEEEEE;
+    }
+    html,body{scroll-behavior:smooth}
+    body{background:#0d1a3d;color:#e9ecf5}
+    /* Header glass */
+    .glass {
+      background: linear-gradient(120deg, rgba(17,34,78,0.65), rgba(17,34,78,0.35));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(203,217,155,0.15);
+    }
+    /* Gradient border utility */
+    .g-border {
+      position: relative;
+      border-radius: 16px;
+      z-index: 0;
+    }
+    .g-border:before {
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, rgba(248,123,27,0.5), rgba(203,217,155,0.5), rgba(238,238,238,0.2));
+      z-index:-1;
+      filter: blur(10px);
+      opacity:.6;
+    }
+    /* Infinity animated hero background */
+    .hero-bg {
+      position:absolute; inset:0; overflow:hidden; z-index:0;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(203,217,155,0.12), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(248,123,27,0.12), transparent 60%),
+                  radial-gradient(1200px 800px at 50% 90%, rgba(255,255,255,0.06), transparent 70%),
+                  linear-gradient(180deg, #0e1d42 0%, #0a1534 100%);
+    }
+    .orb {
+      position:absolute; border-radius:50%;
+      filter: blur(40px); opacity:.65; mix-blend-mode: screen;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+    .orb.o1{ width:420px; height:420px; left:-60px; top:-60px; background: radial-gradient(circle at 30% 30%, rgba(248,123,27,0.7), rgba(248,123,27,0.15));}
+    .orb.o2{ width:520px; height:520px; right:-120px; top:20%; background: radial-gradient(circle at 70% 50%, rgba(203,217,155,0.7), rgba(203,217,155,0.12)); animation-duration: 16s;}
+    .orb.o3{ width:380px; height:380px; left:30%; bottom:-120px; background: radial-gradient(circle at 60% 60%, rgba(238,238,238,0.6), rgba(238,238,238,0.12)); animation-duration: 18s;}
+    @keyframes float {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(40px,-30px,0) scale(1.06); }
+    }
+    /* Infinity banner anim */
+    .infinity {
+      --size: 28vmin;
+      position:relative; width: var(--size); height: calc(var(--size)*0.5);
+      border: 3px solid rgba(238,238,238,0.18);
+      border-radius: 50% 50% 50% 50% / 75% 75% 25% 25%;
+      transform: rotate(45deg);
+      animation: pulse 6s ease-in-out infinite;
+      box-shadow: inset 0 0 40px rgba(248,123,27,0.25), 0 0 60px rgba(203,217,155,0.15);
+    }
+    .infinity:before, .infinity:after{
+      content:""; position:absolute; inset:-3px; border:3px dashed rgba(203,217,155,0.35); border-radius:inherit; animation: spin 18s linear infinite;
+    }
+    .infinity:after{ animation-direction: reverse; opacity:.6 }
+    @keyframes spin{ to { transform: rotate(360deg) } }
+    @keyframes pulse{
+      0%,100%{ box-shadow: inset 0 0 40px rgba(248,123,27,0.25), 0 0 60px rgba(203,217,155,0.15); }
+      50%{ box-shadow: inset 0 0 80px rgba(248,123,27,0.4), 0 0 120px rgba(203,217,155,0.25); }
+    }
+    /* Animated underline link */
+    .link-underline {
+      position:relative;
+    }
+    .link-underline:after{
+      content:""; position:absolute; left:0; bottom:-3px; width:100%; height:2px;
+      background: linear-gradient(90deg, var(--accent), var(--sage));
+      transform: scaleX(0); transform-origin: left; transition: transform .35s ease;
+    }
+    .link-underline:hover:after{ transform: scaleX(1) }
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ff9a47);
+      color:#0b193a; font-weight:700;
+      box-shadow: 0 10px 24px rgba(248,123,27,0.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 16px 30px rgba(248,123,27,0.45); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.06); border:1px solid rgba(203,217,155,0.35);
+      color:#e9ecf5;
+    }
+    /* Cards */
+    .card {
+      background: linear-gradient(180deg, rgba(17,34,78,0.75), rgba(17,34,78,0.55));
+      border: 1px solid rgba(203,217,155,0.18);
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(248,123,27,0.35);}
+    /* Section reveal */
+    .reveal { opacity:0; transform: translateY(24px); transition: all .8s cubic-bezier(.2,.6,.2,1); }
+    .reveal.visible { opacity:1; transform: translateY(0); }
+    /* 3D scroll panel */
+    .tilt-3d { transform-style: preserve-3d; perspective: 1000px; }
+    .tilt-child { transform: translateZ(40px); }
+    /* Pricing toggle */
+    .toggle { background: rgba(238,238,238,0.08); border:1px solid rgba(203,217,155,0.25); }
+    .toggle input:checked + .dot { transform: translateX(100%); background: linear-gradient(135deg, var(--accent), #ff9a47); }
+    /* Marquee */
+    .marquee { overflow:hidden; position:relative }
+    .marquee-track { display:flex; gap:48px; animation: marquee 22s linear infinite; }
+    @keyframes marquee { from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+    /* Footer animation */
+    .wave {
+      position:absolute; left:0; right:0; height:140px; bottom:0; pointer-events:none; opacity:.5;
+      background: radial-gradient(60% 80% at 50% 120%, rgba(248,123,27,0.35), transparent 70%), radial-gradient(50% 60% at 30% 110%, rgba(203,217,155,0.25), transparent 70%);
+      animation: wave 8s ease-in-out infinite alternate;
+    }
+    @keyframes wave { from{ transform: translateY(0) } to{ transform: translateY(10px) } }
+    /* Mobile nav */
+    .mobile-menu { transform-origin: top right; transition: transform .25s ease, opacity .25s ease; }
+    .mobile-menu.hidden { transform: scale(.95); opacity:0; pointer-events:none; }
+    /* Simple slider */
+    .slider{ position:relative; overflow:hidden; }
+    .slides{ display:flex; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+    .dot-nav button{ width:10px; height:10px; border-radius:50%; background: rgba(238,238,238,0.3);}
+    .dot-nav button.active{ background: linear-gradient(135deg, var(--accent), #ff9a47); box-shadow: 0 0 0 4px rgba(248,123,27,0.2); }
+    /* Tree lines */
+    .link-line {
+      position:absolute; width:2px; background: linear-gradient(to bottom, rgba(203,217,155,0.6), rgba(248,123,27,0.6));
+      box-shadow: 0 0 12px rgba(248,123,27,0.25);
+    }
+    /* Tooltips */
+    .tooltip { position:relative }
+    .tooltip:hover:after{
+      content: attr(data-tip);
+      position:absolute; left:50%; bottom: calc(100% + 10px);
+      transform: translateX(-50%); white-space:nowrap;
+      background: rgba(17,34,78,0.95); border:1px solid rgba(203,217,155,0.35);
+      padding:8px 10px; border-radius:8px; font-size:12px; color:#e9ecf5; z-index:10;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="glass mt-4 rounded-2xl shadow-smooth">
+        <div class="flex items-center justify-between px-4 py-3 md:px-6">
+          <a href="#" class="flex items-center gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl" style="background:linear-gradient(135deg,#F87B1B,#ff9a47); box-shadow:0 8px 20px rgba(248,123,27,.35)"><span class="font-extrabold text-primary">₨</span></span>
+            <div class="leading-tight">
+              <div class="text-light text-xl font-extrabold tracking-tight">PKR Earn</div>
+              <div class="text-[11px] text-sage/80 uppercase tracking-widest">Invest • Invite • Grow</div>
+            </div>
+          </a>
+          <nav class="hidden items-center gap-6 md:flex">
+            <a href="#hero" class="text-light/90 link-underline">Home</a>
+            <a href="#how" class="text-light/90 link-underline">How it works</a>
+            <a href="#plans" class="text-light/90 link-underline">Plans</a>
+            <a href="#tree" class="text-light/90 link-underline">Team Tree</a>
+            <a href="#stats" class="text-light/90 link-underline">Stats</a>
+            <a href="#faq" class="text-light/90 link-underline">FAQ</a>
+            <a href="#app" class="btn-primary rounded-xl px-4 py-2">Get Started</a>
+          </nav>
+          <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl btn-ghost">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#CBD99B" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div id="mobileMenu" class="mobile-menu hidden px-4 pb-4 md:hidden">
+          <div class="mt-2 grid gap-2">
+            <a href="#hero" class="link-underline py-2">Home</a>
+            <a href="#how" class="link-underline py-2">How it works</a>
+            <a href="#plans" class="link-underline py-2">Plans</a>
+            <a href="#tree" class="link-underline py-2">Team Tree</a>
+            <a href="#stats" class="link-underline py-2">Stats</a>
+            <a href="#faq" class="link-underline py-2">FAQ</a>
+            <a href="#app" class="btn-primary mt-2 rounded-xl px-4 py-2 text-center">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="relative pt-36">
+    <div class="hero-bg">
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="orb o3"></div>
+    </div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div class="tilt-3d">
+          <div class="tilt-child">
+            <h1 class="text-4xl font-extrabold leading-tight text-light md:text-6xl">
+              Earn PKR by Investing, Inviting, and Growing Your Binary Team
+            </h1>
+            <p class="mt-4 max-w-xl text-light/80">
+              Start with a secure investment. Invite two direct partners. Earn bonuses as your left and right branches grow infinitely.
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a href="#plans" class="btn-primary rounded-xl px-6 py-3">View Plans</a>
+              <a href="#how" class="btn-ghost rounded-xl px-6 py-3">How It Works</a>
+            </div>
+            <div class="mt-6 flex items-center gap-6 text-sm text-light/70">
+              <div class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full" style="background:#F87B1B"></span> Instant referral bonuses</div>
+              <div class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full" style="background:#CBD99B"></span> Auto spillover to team</div>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <div class="infinity"></div>
+          <div class="absolute -bottom-6 w-full max-w-sm rounded-2xl border border-sage/20 bg-primary/60 p-4 text-light shadow-smooth backdrop-blur">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-xs uppercase text-sage/80">Live Pool Volume</div>
+                <div class="text-2xl font-bold"><span id="liveVolume">₨ 12,45,000</span></div>
+              </div>
+              <button id="quickInvest" class="btn-primary rounded-lg px-4 py-2 text-sm">Quick Invest</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Hero Slider -->
+      <div class="slider g-border mt-16 rounded-2xl">
+        <div id="heroSlides" class="slides">
+          <div class="min-w-full p-6 md:p-10">
+            <div class="card grid gap-6 rounded-2xl p-6 md:grid-cols-2 md:p-10">
+              <div>
+                <h3 class="text-2xl font-bold text-light">Binary Growth Engine</h3>
+                <p class="mt-2 text-light/80">Directly invite 2 partners. Spillover continues down your left/right branches for infinite depth.</p>
+                <ul class="mt-4 list-disc space-y-1 pl-5 text-light/70">
+                  <li>Balanced growth rewards</li>
+                  <li>Auto-placement for overflow</li>
+                  <li>Transparent progress tracking</li>
+                </ul>
+              </div>
+              <img alt="Binary tree" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" />
+            </div>
+          </div>
+          <div class="min-w-full p-6 md:p-10">
+            <div class="card grid gap-6 rounded-2xl p-6 md:grid-cols-2 md:p-10">
+              <div>
+                <h3 class="text-2xl font-bold text-light">Real-Time Earnings</h3>
+                <p class="mt-2 text-light/80">Watch your PKR grow with instant referrals and daily pool matching bonuses.</p>
+                <div class="mt-4 flex gap-3">
+                  <span class="rounded-lg bg-white/10 px-3 py-1 text-sm">Referral +10%</span>
+                  <span class="rounded-lg bg-white/10 px-3 py-1 text-sm">Matching +6%</span>
+                  <span class="rounded-lg bg-white/10 px-3 py-1 text-sm">Rank Boost</span>
+                </div>
+              </div>
+              <img alt="Earnings dashboard" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551281044-8d8d8a9d10e5?q=80&w=1200&auto=format&fit=crop" />
+            </div>
+          </div>
+          <div class="min-w-full p-6 md:p-10">
+            <div class="card grid gap-6 rounded-2xl p-6 md:grid-cols-2 md:p-10">
+              <div>
+                <h3 class="text-2xl font-bold text-light">Secure Wallet</h3>
+                <p class="mt-2 text-light/80">Deposit PKR, invest in plans, and withdraw profits securely with transparent logs.</p>
+                <div class="mt-4 flex items-center gap-4">
+                  <div class="text-sage/80">Bank</div>
+                  <div class="text-sage/80">JazzCash</div>
+                  <div class="text-sage/80">EasyPaisa</div>
+                </div>
+              </div>
+              <img alt="Secure wallet" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" />
+            </div>
+          </div>
+        </div>
+        <div class="dot-nav absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+          <button data-slide="0" class="active"></button>
+          <button data-slide="1"></button>
+          <button data-slide="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee brands -->
+  <section class="marquee py-10">
+    <div class="marquee-track">
+      <div class="text-sage/80">Trusted by 50,000+ investors</div>
+      <div class="text-sage/80">Bank-grade security</div>
+      <div class="text-sage/80">Instant referral payouts</div>
+      <div class="text-sage/80">Binary tree automation</div>
+      <div class="text-sage/80">24/7 Support</div>
+      <div class="text-sage/80">Transparent analytics</div>
+      <div class="text-sage/80">Trusted by 50,000+ investors</div>
+      <div class="text-sage/80">Bank-grade security</div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal text-center">
+        <h2 class="text-3xl font-extrabold text-light md:text-4xl">How PKR Earn Works</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-light/80">Invest in a plan, invite two partners, and let the binary engine grow your network with spillover depth.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="card reveal p-6">
+          <div class="rounded-xl bg-white/10 p-3 w-fit">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="#F87B1B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="mt-4 text-xl font-bold">1. Invest</h3>
+          <p class="text-light/80">Choose a PKR plan and activate your account instantly.</p>
+        </div>
+        <div class="card reveal p-6">
+          <div class="rounded-xl bg-white/10 p-3 w-fit">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 7l5 5-5 5" stroke="#CBD99B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="mt-4 text-xl font-bold">2. Invite</h3>
+          <p class="text-light/80">Share your link. You can directly add 2 partners (Left & Right).</p>
+        </div>
+        <div class="card reveal p-6">
+          <div class="rounded-xl bg-white/10 p-3 w-fit">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12c3 0 4 8 8 8s5-8 8-8" stroke="#F87B1B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="mt-4 text-xl font-bold">3. Earn</h3>
+          <p class="text-light/80">Earn referral and matching bonuses as your team expands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Investment Plans -->
+  <section id="plans" class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal flex flex-col items-center justify-between gap-4 md:flex-row">
+        <div>
+          <h2 class="text-3xl font-extrabold text-light md:text-4xl">Investment Plans</h2>
+          <p class="mt-2 text-light/80">Choose flexible PKR plans. Toggle monthly/yearly to maximize value.</p>
+        </div>
+        <label class="toggle relative inline-flex w-28 items-center justify-between rounded-full px-2 py-1">
+          <span class="text-xs text-light/70">Monthly</span>
+          <input id="priceToggle" type="checkbox" class="peer sr-only" />
+          <span class="dot absolute left-1 top-1 h-7 w-14 rounded-full transition"></span>
+          <span class="ml-16 text-xs text-light/70">Yearly</span>
+        </label>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="card reveal p-6">
+          <div class="text-sm text-sage/80">Starter</div>
+          <div class="mt-2 text-3xl font-extrabold"><span class="text-accent" id="p1">₨ 5,000</span></div>
+          <ul class="mt-4 space-y-2 text-light/80">
+            <li>Referral bonus 8%</li>
+            <li>Matching bonus 4%</li>
+            <li>Daily cap ₨ 2,000</li>
+          </ul>
+          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+        </div>
+        <div class="card reveal p-6 ring-2 ring-accent/40">
+          <div class="text-sm text-sage/80">Pro</div>
+          <div class="mt-2 text-3xl font-extrabold"><span class="text-accent" id="p2">₨ 25,000</span></div>
+          <ul class="mt-4 space-y-2 text-light/80">
+            <li>Referral bonus 10%</li>
+            <li>Matching bonus 6%</li>
+            <li>Daily cap ₨ 10,000</li>
+          </ul>
+          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+        </div>
+        <div class="card reveal p-6">
+          <div class="text-sm text-sage/80">Elite</div>
+          <div class="mt-2 text-3xl font-extrabold"><span class="text-accent" id="p3">₨ 100,000</span></div>
+          <ul class="mt-4 space-y-2 text-light/80">
+            <li>Referral bonus 12%</li>
+            <li>Matching bonus 8%</li>
+            <li>Daily cap ₨ 40,000</li>
+          </ul>
+          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+        </div>
+      </div>
+      <!-- Animated pricing comparison -->
+      <div class="reveal g-border mt-10 rounded-2xl p-1">
+        <div class="card rounded-2xl p-6 md:p-8">
+          <h3 class="text-2xl font-bold">Projected Earnings (Illustrative)</h3>
+          <div class="mt-6 grid gap-6 md:grid-cols-3">
+            <div class="rounded-xl border border-sage/20 p-4 text-sm">
+              <div class="text-sage/80">Starter</div>
+              <div class="mt-2 text-2xl font-extrabold" id="e1">₨ 9,600/mo</div>
+              <div class="mt-2 h-2 w-full rounded bg-white/10">
+                <div id="bar1" class="h-2 rounded" style="background:linear-gradient(90deg,#F87B1B,#ffb36e); width:40%"></div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-sage/20 p-4 text-sm">
+              <div class="text-sage/80">Pro</div>
+              <div class="mt-2 text-2xl font-extrabold" id="e2">₨ 48,000/mo</div>
+              <div class="mt-2 h-2 w-full rounded bg-white/10">
+                <div id="bar2" class="h-2 rounded" style="background:linear-gradient(90deg,#F87B1B,#ffb36e); width:70%"></div>
+              </div>
+            </div>
+            <div class="rounded-xl border border-sage/20 p-4 text-sm">
+              <div class="text-sage/80">Elite</div>
+              <div class="mt-2 text-2xl font-extrabold" id="e3">₨ 192,000/mo</div>
+              <div class="mt-2 h-2 w-full rounded bg-white/10">
+                <div id="bar3" class="h-2 rounded" style="background:linear-gradient(90deg,#F87B1B,#ffb36e); width:90%"></div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 text-xs text-light/60">Note: For demonstration only. Actual returns depend on team performance and plan rules.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Binary Team Tree (interactive) -->
+  <section id="tree" class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal text-center">
+        <h2 class="text-3xl font-extrabold md:text-4xl">Your Binary Team Tree</h2>
+        <p class="mx-auto mt-2 max-w-2xl text-light/80">Each user has exactly 2 direct children. Spillover continues to the next available left/right slot in depth.</p>
+      </div>
+      <div class="mt-10 overflow-x-auto">
+        <div id="treeArea" class="relative mx-auto min-w-[640px] max-w-4xl rounded-2xl border border-sage/20 bg-primary/60 p-6">
+          <div class="grid grid-cols-8 gap-4">
+            <div class="col-span-8 flex flex-col items-center">
+              <div class="tooltip relative rounded-xl border border-sage/30 bg-white/10 px-4 py-2 text-sm font-semibold" data-tip="User: You | Rank: Starter">
+                You
+              </div>
+              <div class="link-line" style="height:28px; top:56px;"></div>
+            </div>
+            <div class="col-span-4 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/30 bg-white/10 px-3 py-2 text-sm">Left</div>
+            </div>
+            <div class="col-span-4 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/30 bg-white/10 px-3 py-2 text-sm">Right</div>
+            </div>
+            <div class="col-span-2 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/20 bg-white/5 px-2 py-1 text-xs">L1</div>
+            </div>
+            <div class="col-span-2 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/20 bg-white/5 px-2 py-1 text-xs">L2</div>
+            </div>
+            <div class="col-span-2 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/20 bg-white/5 px-2 py-1 text-xs">R1</div>
+            </div>
+            <div class="col-span-2 flex flex-col items-center">
+              <div class="rounded-xl border border-sage/20 bg-white/5 px-2 py-1 text-xs">R2</div>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-center gap-3">
+            <button id="addLeft" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Left Child</button>
+            <button id="addRight" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Right Child</button>
+            <button id="autoFill" class="btn-primary rounded-lg px-4 py-2 text-sm">Auto Spillover</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section id="stats" class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid gap-6 md:grid-cols-4">
+        <div class="card reveal p-6 text-center">
+          <div class="text-sm text-sage/80">Active Investors</div>
+          <div id="c1" class="mt-2 text-3xl font-extrabold">0</div>
+        </div>
+        <div class="card reveal p-6 text-center">
+          <div class="text-sm text-sage/80">Total Payouts</div>
+          <div id="c2" class="mt-2 text-3xl font-extrabold">₨ 0</div>
+        </div>
+        <div class="card reveal p-6 text-center">
+          <div class="text-sm text-sage/80">Daily Volume</div>
+          <div id="c3" class="mt-2 text-3xl font-extrabold">₨ 0</div>
+        </div>
+        <div class="card reveal p-6 text-center">
+          <div class="text-sm text-sage/80">Avg. ROI</div>
+          <div id="c4" class="mt-2 text-3xl font-extrabold">0%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="card reveal p-6">
+          <h3 class="text-xl font-bold">Smart Placement</h3>
+          <p class="mt-2 text-light/80">System places overflow on the next available left/right slot of the inviter’s subtree.</p>
+        </div>
+        <div class="card reveal p-6">
+          <h3 class="text-xl font-bold">Transparent Logs</h3>
+          <p class="mt-2 text-light/80">Every bonus and commission is recorded and visible in your profile wallet.</p>
+        </div>
+        <div class="card reveal p-6">
+          <h3 class="text-xl font-bold">Secure PKR Handling</h3>
+          <p class="mt-2 text-light/80">Deposit and withdraw with bank and popular wallet integrations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Scroll Showcase -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal g-border rounded-2xl p-1">
+        <div class="card tilt-3d rounded-2xl p-8">
+          <h3 class="text-2xl font-bold">Scroll to Feel the Depth</h3>
+          <p class="mt-2 text-light/80">Subtle 3D parallax responds to your mouse and scroll.</p>
+          <div class="mt-6 grid gap-6 md:grid-cols-3">
+            <div class="tilt-child rounded-2xl border border-sage/20 bg-white/5 p-6">Low Fees</div>
+            <div class="tilt-child rounded-2xl border border-sage/20 bg-white/5 p-6">Fast Payout</div>
+            <div class="tilt-child rounded-2xl border border-sage/20 bg-white/5 p-6">24/7 Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <img class="reveal w-full rounded-2xl border border-sage/20" src="https://images.unsplash.com/photo-1559136651-73a45393eabd?q=80&w=1200&auto=format&fit=crop" alt="Security" />
+        <div class="reveal">
+          <h3 class="text-3xl font-extrabold">Security First</h3>
+          <p class="mt-3 text-light/80">We use industry best-practices to protect your data and funds.</p>
+          <ul class="mt-4 space-y-2 text-light/80">
+            <li>2FA and device lock</li>
+            <li>Encrypted transactions</li>
+            <li>Regular audits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Referral CTA -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal card rounded-2xl p-8 text-center">
+        <h3 class="text-3xl font-extrabold">Share and Earn</h3>
+        <p class="mt-2 text-light/80">Invite two partners to unlock full binary earnings. Extra invites spill to your team automatically.</p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <input id="refLink" class="w-full max-w-md rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" value="https://pkr-earn.com/ref/your-id" />
+          <button id="copyRef" class="btn-primary rounded-xl px-6 py-3">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <h3 class="reveal text-center text-3xl font-extrabold">What investors say</h3>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="card reveal p-6">
+          <p class="text-light/80">I started with Pro and built a balanced tree. Payouts arrive on time!</p>
+          <div class="mt-4 text-sm text-sage/80">— Ali R.</div>
+        </div>
+        <div class="card reveal p-6">
+          <p class="text-light/80">The two-child rule with spillover keeps growth fair and fast.</p>
+          <div class="mt-4 text-sm text-sage/80">— Hira K.</div>
+        </div>
+        <div class="card reveal p-6">
+          <p class="text-light/80">Transparent logs and easy withdrawals. Love the UI.</p>
+          <div class="mt-4 text-sm text-sage/80">— Usman Q.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App CTA -->
+  <section id="app" class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal grid items-center gap-10 md:grid-cols-2">
+        <div>
+          <h3 class="text-3xl font-extrabold">Create your account</h3>
+          <p class="mt-2 text-light/80">Sign up using an invitation link to connect to your sponsor tree.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button class="btn-primary rounded-xl px-6 py-3">Sign Up</button>
+            <button class="btn-ghost rounded-xl px-6 py-3">Login</button>
+          </div>
+        </div>
+        <div class="card rounded-2xl p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs uppercase text-sage/80">Next matching bonus in</div>
+              <div id="countdown" class="text-3xl font-extrabold">00:59:59</div>
+            </div>
+            <div class="rounded-xl bg-white/10 p-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#CBD99B" stroke-width="2"/><path d="M12 7v6l4 2" stroke="#F87B1B" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="relative py-20">
+    <div class="mx-auto max-w-5xl px-4">
+      <h3 class="reveal text-center text-3xl font-extrabold">Frequently Asked Questions</h3>
+      <div class="mt-10 space-y-4">
+        <details class="card reveal overflow-hidden rounded-2xl p-6">
+          <summary class="cursor-pointer list-none text-lg font-semibold">How many direct referrals can I add?</summary>
+          <p class="mt-3 text-light/80">Exactly two. Extra invites spill down to your subtree on the next available slot.</p>
+        </details>
+        <details class="card reveal overflow-hidden rounded-2xl p-6">
+          <summary class="cursor-pointer list-none text-lg font-semibold">When do I receive referral bonuses?</summary>
+          <p class="mt-3 text-light/80">Instantly after your referral activates a plan.</p>
+        </details>
+        <details class="card reveal overflow-hidden rounded-2xl p-6">
+          <summary class="cursor-pointer list-none text-lg font-semibold">How are matching bonuses calculated?</summary>
+          <p class="mt-3 text-light/80">Based on the weaker side daily volume for balanced growth.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog / Insights -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="card reveal p-6">
+          <div class="text-xs text-sage/80">Trading</div>
+          <h4 class="mt-2 text-xl font-bold">5 ways to balance your left/right volume</h4>
+          <p class="mt-2 text-light/80">Simple strategies to keep both branches growing steadily.</p>
+        </article>
+        <article class="card reveal p-6">
+          <div class="text-xs text-sage/80">Investment</div>
+          <h4 class="mt-2 text-xl font-bold">Choosing the right plan for your goals</h4>
+          <p class="mt-2 text-light/80">Starter, Pro, or Elite? Here’s a quick guide.</p>
+        </article>
+        <article class="card reveal p-6">
+          <div class="text-xs text-sage/80">Team Tech</div>
+          <h4 class="mt-2 text-xl font-bold">Auto spillover explained</h4>
+          <p class="mt-2 text-light/80">How extra invites find their position in your binary tree.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-3xl px-4">
+      <div class="card reveal rounded-2xl p-8 text-center">
+        <h3 class="text-2xl font-bold">Get updates on new bonuses</h3>
+        <form id="newsletterForm" class="mx-auto mt-6 flex max-w-md gap-3">
+          <input type="email" required placeholder="Enter your email" class="w-full rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" />
+          <button class="btn-primary rounded-xl px-6">Subscribe</button>
+        </form>
+        <div id="newsletterMsg" class="mt-3 text-sm text-sage/80"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="relative py-20">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="card reveal p-6">
+          <h3 class="text-xl font-bold">Contact Support</h3>
+          <p class="mt-2 text-light/80">We respond within 24 hours.</p>
+          <div class="mt-4 space-y-2 text-sm text-sage/80">
+            <div>Email: help@pkr-earn.com</div>
+            <div>Phone: +92 300 0000000</div>
+          </div>
+        </div>
+        <form id="contactForm" class="card reveal grid gap-3 p-6">
+          <input class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" placeholder="Your Name" required />
+          <input type="email" class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" placeholder="Your Email" required />
+          <textarea class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" rows="4" placeholder="Message" required></textarea>
+          <button class="btn-primary rounded-xl px-6 py-3">Send</button>
+          <div id="contactMsg" class="text-sm text-sage/80"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative mt-10 bg-[#0a1534]">
+    <div class="wave"></div>
+    <div class="mx-auto max-w-7xl px-4 py-12">
+      <div class="grid gap-6 md:grid-cols-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl" style="background:linear-gradient(135deg,#F87B1B,#ff9a47)"><span class="font-extrabold text-primary">₨</span></span>
+            <div class="text-light font-extrabold">PKR Earn</div>
+          </div>
+          <p class="mt-3 text-sm text-light/70">Invest • Invite • Grow</p>
+        </div>
+        <div>
+          <div class="font-semibold">Product</div>
+          <ul class="mt-3 space-y-2 text-light/70">
+            <li><a href="#plans" class="link-underline">Plans</a></li>
+            <li><a href="#tree" class="link-underline">Team Tree</a></li>
+            <li><a href="#faq" class="link-underline">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Company</div>
+          <ul class="mt-3 space-y-2 text-light/70">
+            <li><a href="#" class="link-underline">About</a></li>
+            <li><a href="#" class="link-underline">Careers</a></li>
+            <li><a href="#" class="link-underline">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Legal</div>
+          <ul class="mt-3 space-y-2 text-light/70">
+            <li><a href="#" class="link-underline">Terms</a></li>
+            <li><a href="#" class="link-underline">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-6 text-sm text-light/60">© <span id="year"></span> PKR Earn. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Minimal external libraries for charts (optional demonstration) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Main JS -->
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, {threshold: .15});
+    revealEls.forEach(el=> io.observe(el));
+
+    // Hero slider
+    const slides = document.getElementById('heroSlides');
+    const dots = document.querySelectorAll('.dot-nav button');
+    let currentSlide = 0;
+    const goSlide = (i)=>{
+      currentSlide = i;
+      slides.style.transform = 'translateX(' + (-i*100) + '%)';
+      dots.forEach((d,idx)=> d.classList.toggle('active', idx===i));
+    }
+    dots.forEach(d=> d.addEventListener('click', (e)=> goSlide(+e.target.dataset.slide)));
+    setInterval(()=> goSlide((currentSlide+1)%3), 6000);
+
+    // Live volume tick
+    const liveEl = document.getElementById('liveVolume');
+    setInterval(()=>{
+      const cur = Math.floor(Math.random()*50000) + 1200000;
+      liveEl.textContent = '₨ ' + cur.toLocaleString('en-PK');
+    }, 3000);
+
+    // Pricing toggle
+    const toggle = document.getElementById('priceToggle');
+    const p1=document.getElementById('p1'), p2=document.getElementById('p2'), p3=document.getElementById('p3');
+    const e1=document.getElementById('e1'), e2=document.getElementById('e2'), e3=document.getElementById('e3');
+    const bars=[document.getElementById('bar1'),document.getElementById('bar2'),document.getElementById('bar3')];
+    toggle?.addEventListener('change', ()=>{
+      if(toggle.checked){
+        p1.textContent='₨ 50,000'; p2.textContent='₨ 250,000'; p3.textContent='₨ 1,000,000';
+        e1.textContent='₨ 120,000/yr'; e2.textContent='₨ 600,000/yr'; e3.textContent='₨ 2,400,000/yr';
+        bars[0].style.width='55%'; bars[1].style.width='80%'; bars[2].style.width='95%';
+      } else {
+        p1.textContent='₨ 5,000'; p2.textContent='₨ 25,000'; p3.textContent='₨ 100,000';
+        e1.textContent='₨ 9,600/mo'; e2.textContent='₨ 48,000/mo'; e3.textContent='₨ 192,000/mo';
+        bars[0].style.width='40%'; bars[1].style.width='70%'; bars[2].style.width='90%';
+      }
+    });
+
+    // 3D tilt
+    document.querySelectorAll('.tilt-3d').forEach(container=>{
+      container.addEventListener('mousemove', (e)=>{
+        const r=container.getBoundingClientRect();
+        const x=(e.clientX - r.left)/r.width - .5;
+        const y=(e.clientY - r.top)/r.height - .5;
+        container.style.transform=`perspective(1000px) rotateX(${(-y*6)}deg) rotateY(${(x*6)}deg)`;
+      });
+      container.addEventListener('mouseleave', ()=> container.style.transform='perspective(1000px) rotateX(0) rotateY(0)');
+    });
+
+    // Stats counters
+    const animateCount=(el, to, prefix='')=>{
+      const start=0; const dur=1500; const t0=performance.now();
+      const step=(t)=>{
+        const p=Math.min((t-t0)/dur,1); const val=Math.floor(p*to);
+        el.textContent = prefix ? (prefix + ' ' + val.toLocaleString('en-PK')) : val.toLocaleString('en-PK');
+        if(p<1) requestAnimationFrame(step);
+      }; requestAnimationFrame(step);
+    }
+    window.addEventListener('load', ()=>{
+      animateCount(document.getElementById('c1'), 52340);
+      animateCount(document.getElementById('c2'), 872340000, '₨');
+      animateCount(document.getElementById('c3'), 12450000, '₨');
+      const c4=document.getElementById('c4'); let p=0; const int=setInterval(()=>{ p+=2; c4.textContent=p+'%'; if(p>=72) clearInterval(int)},50);
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // Referral copy
+    document.getElementById('copyRef')?.addEventListener('click', ()=>{
+      const input = document.getElementById('refLink');
+      input.select(); input.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(input.value);
+      const btn = document.getElementById('copyRef');
+      const old = btn.textContent; btn.textContent='Copied!';
+      setTimeout(()=> btn.textContent=old, 1200);
+    });
+
+    // Newsletter and Contact
+    document.getElementById('newsletterForm')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      document.getElementById('newsletterMsg').textContent = 'Thanks! You are subscribed.';
+      e.target.reset();
+    });
+    document.getElementById('contactForm')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      document.getElementById('contactMsg').textContent = 'Message sent. Our team will get back shortly.';
+      e.target.reset();
+    });
+
+    // Countdown 1 hour rolling
+    const countdownEl = document.getElementById('countdown');
+    let next = Date.now() + 3600*1000;
+    setInterval(()=>{
+      const diff = next - Date.now();
+      if(diff<=0) next = Date.now() + 3600*1000;
+      const s = Math.floor((next - Date.now())/1000);
+      const h = String(Math.floor(s/3600)).padStart(2,'0');
+      const m = String(Math.floor((s%3600)/60)).padStart(2,'0');
+      const sec = String(s%60).padStart(2,'0');
+      countdownEl.textContent = `${h}:${m}:${sec}`;
+    }, 1000);
+
+    // Tree simulation
+    const treeArea = document.getElementById('treeArea');
+    const createNode = (label='User')=>{
+      const el=document.createElement('div');
+      el.className='tooltip relative rounded-xl border border-sage/30 bg-white/10 px-3 py-2 text-xs';
+      el.textContent=label;
+      el.dataset.tip='Active';
+      return el;
+    }
+    const addChild = (side)=>{
+      const slot = document.querySelector(`#treeArea .grid .col-span-4:nth-child(${side==='left'?3:4})`);
+      if(!slot) return;
+      const holder = document.createElement('div');
+      holder.className='mt-2 flex flex-col items-center gap-2';
+      holder.appendChild(createNode(side==='left'?'Left A':'Right A'));
+      // draw link
+      const line=document.createElement('div'); line.className='link-line'; line.style.height='24px';
+      holder.appendChild(line);
+      // children
+      const row=document.createElement('div'); row.className='mt-2 grid grid-cols-2 gap-4';
+      row.appendChild(createNode('A1'));
+      row.appendChild(createNode('A2'));
+      holder.appendChild(row);
+      slot.appendChild(holder);
+    }
+    document.getElementById('addLeft')?.addEventListener('click', ()=> addChild('left'));
+    document.getElementById('addRight')?.addEventListener('click', ()=> addChild('right'));
+    document.getElementById('autoFill')?.addEventListener('click', ()=>{
+      addChild('left'); setTimeout(()=> addChild('right'), 300);
+    });
+
+    // Quick invest pulse
+    document.getElementById('quickInvest')?.addEventListener('click', ()=>{
+      const b = document.getElementById('quickInvest');
+      b.style.boxShadow='0 0 0 0 rgba(248,123,27,0.6)';
+      b.animate([{boxShadow:'0 0 0 0 rgba(248,123,27,0.6)'},{boxShadow:'0 0 0 12px rgba(248,123,27,0)'}],{duration:700});
+    });
+
+    // Simple area chart demo in plans comparison (optional)
+    try{
+      const canvas = document.createElement('canvas');
+      canvas.height=120;
+      document.querySelector('#plans .card.rounded-2xl.p-6.md\\:p-8')?.appendChild(canvas);
+      new Chart(canvas.getContext('2d'), {
+        type:'line',
+        data:{
+          labels:['W1','W2','W3','W4','W5','W6'],
+          datasets:[{
+            data:[5,9,14,18,22,28],
+            borderColor:'#F87B1B',
+            backgroundColor:'rgba(248,123,27,0.15)',
+            fill:true, tension:.4
+          }]
+        },
+        options:{
+          plugins:{legend:{display:false}},
+          scales:{x:{ticks:{color:'#CBD99B'}}, y:{ticks:{color:'#CBD99B'}}}
+        }
+      });
+    }catch(e){}
+  </script>
+</body>
+</html>
