@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -173,6 +172,76 @@
       padding:8px 10px; border-radius:8px; font-size:12px; color:#e9ecf5; z-index:10;
       box-shadow: 0 10px 24px rgba(0,0,0,0.35);
     }
+
+    /* Responsive hardening */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { width: 100%; overflow-x: hidden; }
+    body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    img, svg, video, canvas { max-width: 100%; }
+    button, a, input, textarea, select { max-width: 100%; }
+    .mx-auto, section, header, footer, main, .card, .g-border { min-width: 0; }
+    .card, .g-border { overflow-wrap: anywhere; }
+    .slides > * { min-width: 100%; min-width: 100%; }
+    .slides img { display:block; width:100%; height:auto; object-fit:cover; }
+    .hero-bg, .orb { pointer-events:none; }
+    .marquee { width:100%; max-width:100%; overflow:hidden; }
+    .marquee-track { width:max-content; min-width:100%; will-change:transform; }
+    .link-underline { overflow-wrap:anywhere; }
+    .tilt-3d { will-change:transform; }
+    #treeArea { width:100%; min-width:0 !important; max-width:100%; overflow:hidden; }
+    #treeArea > .grid { width:100%; min-width:0; }
+    #treeArea .tooltip { max-width:100%; }
+    #treeArea .mt-6.flex { flex-wrap:wrap; }
+    #treeArea .mt-2.grid { width:100%; max-width:240px; }
+    #refLink { min-width:0; }
+    #newsletterForm { flex-wrap:wrap; }
+    #newsletterForm input { min-width:0; flex:1 1 180px; }
+    .dot-nav { z-index:3; }
+    summary::-webkit-details-marker { display:none; }
+    :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    @media (max-width: 767px) {
+      header .glass { margin-top:8px; border-radius:14px; }
+      header .px-4 { padding-left:12px; padding-right:12px; }
+      #hero { padding-top:116px; }
+      #hero h1 { font-size:clamp(2rem, 9vw, 3rem); line-height:1.08; }
+      #hero .tilt-child { transform:none !important; }
+      .orb.o1 { width:260px; height:260px; left:-100px; top:0; }
+      .orb.o2 { width:300px; height:300px; right:-130px; }
+      .orb.o3 { width:240px; height:240px; left:20%; bottom:-80px; }
+      .infinity { --size:54vw; }
+      .slider { margin-top:2.5rem; }
+      .slider .slides > div { padding:1rem; }
+      .slider .card { padding:1rem; }
+      .slider .card img { max-height:220px; object-fit:cover; }
+      .marquee-track { gap:24px; animation-duration:28s; }
+      #plans .toggle { transform:scale(.95); transform-origin:right center; }
+      #treeArea { padding:1rem; }
+      #treeArea .grid { gap:.5rem; }
+      #treeArea .grid .rounded-xl, #treeArea .grid .rounded-xl.border { font-size:11px; padding:.45rem .5rem; }
+      #treeArea .mt-6.flex { gap:.5rem; }
+      #treeArea .mt-6.flex button { flex:1 1 100%; }
+      .tilt-child { transform:none !important; }
+      .card:hover { transform:none; }
+      .wave { height:100px; }
+    }
+    @media (max-width: 420px) {
+      .text-3xl { font-size:1.6rem; }
+      .text-2xl { font-size:1.35rem; }
+      #hero .flex.items-center.gap-6 { flex-direction:column; align-items:flex-start; gap:.6rem; }
+      #hero .mt-6.flex { width:100%; }
+      #hero .mt-6.flex a { flex:1 1 100%; text-align:center; }
+      .card { border-radius:14px; }
+      #countdown { font-size:1.8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after {
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
+        scroll-behavior:auto !important;
+      }
+    }
   </style>
 </head>
 <body class="font-sans">
@@ -197,7 +266,7 @@
             <a href="#faq" class="text-light/90 link-underline">FAQ</a>
             <a href="#app" class="btn-primary rounded-xl px-4 py-2">Get Started</a>
           </nav>
-          <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl btn-ghost">
+          <button type="button" id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl btn-ghost">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#CBD99B" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
         </div>
@@ -251,7 +320,7 @@
                 <div class="text-xs uppercase text-sage/80">Live Pool Volume</div>
                 <div class="text-2xl font-bold"><span id="liveVolume">₨ 12,45,000</span></div>
               </div>
-              <button id="quickInvest" class="btn-primary rounded-lg px-4 py-2 text-sm">Quick Invest</button>
+              <button type="button" id="quickInvest" class="btn-primary rounded-lg px-4 py-2 text-sm">Quick Invest</button>
             </div>
           </div>
         </div>
@@ -270,7 +339,7 @@
                   <li>Transparent progress tracking</li>
                 </ul>
               </div>
-              <img alt="Binary tree" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" />
+              <img alt="Binary tree" class="w-full rounded-xl border border-sage/20" loading="eager" fetchpriority="high" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
             </div>
           </div>
           <div class="min-w-full p-6 md:p-10">
@@ -284,7 +353,7 @@
                   <span class="rounded-lg bg-white/10 px-3 py-1 text-sm">Rank Boost</span>
                 </div>
               </div>
-              <img alt="Earnings dashboard" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551281044-8d8d8a9d10e5?q=80&w=1200&auto=format&fit=crop" />
+              <img alt="Earnings dashboard" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551281044-8d8d8a9d10e5?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
             </div>
           </div>
           <div class="min-w-full p-6 md:p-10">
@@ -298,14 +367,14 @@
                   <div class="text-sage/80">EasyPaisa</div>
                 </div>
               </div>
-              <img alt="Secure wallet" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" />
+              <img alt="Secure wallet" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
             </div>
           </div>
         </div>
         <div class="dot-nav absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-          <button data-slide="0" class="active"></button>
-          <button data-slide="1"></button>
-          <button data-slide="2"></button>
+          <button type="button" data-slide="0" class="active"></button>
+          <button type="button" data-slide="1"></button>
+          <button type="button" data-slide="2"></button>
         </div>
       </div>
     </div>
@@ -382,7 +451,7 @@
             <li>Matching bonus 4%</li>
             <li>Daily cap ₨ 2,000</li>
           </ul>
-          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+          <button type="button" class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
         </div>
         <div class="card reveal p-6 ring-2 ring-accent/40">
           <div class="text-sm text-sage/80">Pro</div>
@@ -392,7 +461,7 @@
             <li>Matching bonus 6%</li>
             <li>Daily cap ₨ 10,000</li>
           </ul>
-          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+          <button type="button" class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
         </div>
         <div class="card reveal p-6">
           <div class="text-sm text-sage/80">Elite</div>
@@ -402,7 +471,7 @@
             <li>Matching bonus 8%</li>
             <li>Daily cap ₨ 40,000</li>
           </ul>
-          <button class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
+          <button type="button" class="btn-primary mt-6 w-full rounded-xl px-4 py-3">Activate</button>
         </div>
       </div>
       <!-- Animated pricing comparison -->
@@ -474,9 +543,9 @@
             </div>
           </div>
           <div class="mt-6 flex justify-center gap-3">
-            <button id="addLeft" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Left Child</button>
-            <button id="addRight" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Right Child</button>
-            <button id="autoFill" class="btn-primary rounded-lg px-4 py-2 text-sm">Auto Spillover</button>
+            <button type="button" id="addLeft" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Left Child</button>
+            <button type="button" id="addRight" class="btn-ghost rounded-lg px-4 py-2 text-sm">Add Right Child</button>
+            <button type="button" id="autoFill" class="btn-primary rounded-lg px-4 py-2 text-sm">Auto Spillover</button>
           </div>
         </div>
       </div>
@@ -548,7 +617,7 @@
   <section class="relative py-20">
     <div class="mx-auto max-w-7xl px-4">
       <div class="grid items-center gap-10 md:grid-cols-2">
-        <img class="reveal w-full rounded-2xl border border-sage/20" src="https://images.unsplash.com/photo-1559136651-73a45393eabd?q=80&w=1200&auto=format&fit=crop" alt="Security" />
+        <img class="reveal w-full rounded-2xl border border-sage/20" src="https://images.unsplash.com/photo-1559136651-73a45393eabd?q=80&w=1200&auto=format&fit=crop" alt="Security" / loading="lazy" decoding="async">
         <div class="reveal">
           <h3 class="text-3xl font-extrabold">Security First</h3>
           <p class="mt-3 text-light/80">We use industry best-practices to protect your data and funds.</p>
@@ -570,7 +639,7 @@
         <p class="mt-2 text-light/80">Invite two partners to unlock full binary earnings. Extra invites spill to your team automatically.</p>
         <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
           <input id="refLink" class="w-full max-w-md rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" value="https://pkr-earn.com/ref/your-id" />
-          <button id="copyRef" class="btn-primary rounded-xl px-6 py-3">Copy Link</button>
+          <button type="button" id="copyRef" class="btn-primary rounded-xl px-6 py-3">Copy Link</button>
         </div>
       </div>
     </div>
@@ -605,8 +674,8 @@
           <h3 class="text-3xl font-extrabold">Create your account</h3>
           <p class="mt-2 text-light/80">Sign up using an invitation link to connect to your sponsor tree.</p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <button class="btn-primary rounded-xl px-6 py-3">Sign Up</button>
-            <button class="btn-ghost rounded-xl px-6 py-3">Login</button>
+            <button type="button" class="btn-primary rounded-xl px-6 py-3">Sign Up</button>
+            <button type="button" class="btn-ghost rounded-xl px-6 py-3">Login</button>
           </div>
         </div>
         <div class="card rounded-2xl p-6">
@@ -675,7 +744,7 @@
         <h3 class="text-2xl font-bold">Get updates on new bonuses</h3>
         <form id="newsletterForm" class="mx-auto mt-6 flex max-w-md gap-3">
           <input type="email" required placeholder="Enter your email" class="w-full rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" />
-          <button class="btn-primary rounded-xl px-6">Subscribe</button>
+          <button type="button" class="btn-primary rounded-xl px-6">Subscribe</button>
         </form>
         <div id="newsletterMsg" class="mt-3 text-sm text-sage/80"></div>
       </div>
@@ -698,7 +767,7 @@
           <input class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" placeholder="Your Name" required />
           <input type="email" class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" placeholder="Your Email" required />
           <textarea class="rounded-xl border border-sage/25 bg-white/5 px-4 py-3 text-sm outline-none focus:shadow-glow" rows="4" placeholder="Message" required></textarea>
-          <button class="btn-primary rounded-xl px-6 py-3">Send</button>
+          <button type="button" class="btn-primary rounded-xl px-6 py-3">Send</button>
           <div id="contactMsg" class="text-sm text-sage/80"></div>
         </form>
       </div>
@@ -754,6 +823,7 @@
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn?.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+    mobileMenu?.querySelectorAll('a').forEach(link=>link.addEventListener('click', ()=>mobileMenu.classList.add('hidden')));
 
     // Reveal on scroll
     const revealEls = document.querySelectorAll('.reveal');
@@ -766,6 +836,8 @@
 
     // Hero slider
     const slides = document.getElementById('heroSlides');
+    document.querySelector('.marquee')?.addEventListener('mouseenter', ()=> document.querySelector('.marquee-track')?.style.setProperty('animation-play-state','paused'));
+    document.querySelector('.marquee')?.addEventListener('mouseleave', ()=> document.querySelector('.marquee-track')?.style.setProperty('animation-play-state','running'));
     const dots = document.querySelectorAll('.dot-nav button');
     let currentSlide = 0;
     const goSlide = (i)=>{
