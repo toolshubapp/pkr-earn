@@ -181,7 +181,7 @@
     button, a, input, textarea, select { max-width: 100%; }
     .mx-auto, section, header, footer, main, .card, .g-border { min-width: 0; }
     .card, .g-border { overflow-wrap: anywhere; }
-    .slides > * { min-width: 100%; min-width: 100%; }
+    .slides > * { min-width:100%; width:100%; flex:0 0 100%; }
     .slides img { display:block; width:100%; height:auto; object-fit:cover; }
     .hero-bg, .orb { pointer-events:none; }
     .marquee { width:100%; max-width:100%; overflow:hidden; }
@@ -242,6 +242,88 @@
         scroll-behavior:auto !important;
       }
     }
+  
+    /* Site-wide edge / overflow polish */
+    html, body { width:100%; max-width:100%; overflow-x:hidden; }
+    body { margin:0; }
+    .mx-auto.max-w-7xl {
+      width:100%;
+      max-width:1280px;
+      margin-left:auto !important;
+      margin-right:auto !important;
+      padding-left:16px;
+      padding-right:16px;
+    }
+    .mx-auto.max-w-5xl {
+      width:100%;
+      max-width:1024px;
+      margin-left:auto !important;
+      margin-right:auto !important;
+      padding-left:16px;
+      padding-right:16px;
+    }
+    .mx-auto.max-w-3xl {
+      width:100%;
+      max-width:768px;
+      margin-left:auto !important;
+      margin-right:auto !important;
+      padding-left:16px;
+      padding-right:16px;
+    }
+    section, header, footer { width:100%; max-width:100%; }
+    #hero { overflow:hidden; }
+    #hero > .relative.z-10 { position:relative; z-index:10; }
+    #hero .tilt-3d {
+      transform:none !important;
+      transform-style:flat;
+      perspective:none;
+      min-width:0;
+      overflow:visible;
+    }
+    #hero .tilt-child {
+      transform:none !important;
+      max-width:100%;
+    }
+    #hero h1 {
+      max-width:760px;
+      overflow-wrap:normal;
+      word-break:normal;
+    }
+    .tilt-3d { overflow:hidden; }
+    .tilt-child { max-width:100%; }
+    .grid > *, .flex > * { min-width:0; }
+    .btn-primary, .btn-ghost { white-space:normal; overflow-wrap:anywhere; }
+    .g-border:before { max-width:100vw; }
+    .card:hover { transform:translateY(-4px); }
+    @media (max-width: 767px) {
+      .mx-auto.max-w-7xl,
+      .mx-auto.max-w-5xl,
+      .mx-auto.max-w-3xl {
+        padding-left:12px;
+        padding-right:12px;
+      }
+      #hero h1 {
+        max-width:100%;
+        font-size:clamp(2.15rem, 8.5vw, 3.2rem);
+      }
+      #hero .grid { gap:2.5rem; }
+      #hero .relative.flex.items-center.justify-center { min-height:240px; }
+      #hero .absolute.-bottom-6 { position:relative; bottom:auto; margin-top:-42px; }
+      .tilt-3d { overflow:visible; }
+      .card:hover { transform:none; }
+    }
+    @media (max-width: 480px) {
+      .mx-auto.max-w-7xl,
+      .mx-auto.max-w-5xl,
+      .mx-auto.max-w-3xl {
+        padding-left:10px;
+        padding-right:10px;
+      }
+      #hero { padding-top:108px; }
+      #hero h1 { font-size:clamp(2rem, 10vw, 2.7rem); }
+      #hero .absolute.-bottom-6 { width:calc(100% - 20px); max-width:none; }
+    }
+
   </style>
 </head>
 <body class="font-sans">
@@ -339,7 +421,7 @@
                   <li>Transparent progress tracking</li>
                 </ul>
               </div>
-              <img alt="Binary tree" class="w-full rounded-xl border border-sage/20" loading="eager" fetchpriority="high" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
+              <img alt="Binary tree" class="w-full rounded-xl border border-sage/20" loading="eager" fetchpriority="high" src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="min-w-full p-6 md:p-10">
@@ -353,7 +435,7 @@
                   <span class="rounded-lg bg-white/10 px-3 py-1 text-sm">Rank Boost</span>
                 </div>
               </div>
-              <img alt="Earnings dashboard" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551281044-8d8d8a9d10e5?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
+              <img alt="Earnings dashboard" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1551281044-8d8d8a9d10e5?q=80&w=1200&auto=format&fit=crop" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="min-w-full p-6 md:p-10">
@@ -367,7 +449,7 @@
                   <div class="text-sage/80">EasyPaisa</div>
                 </div>
               </div>
-              <img alt="Secure wallet" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" / loading="lazy" decoding="async">
+              <img alt="Secure wallet" class="w-full rounded-xl border border-sage/20" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" loading="lazy" decoding="async">
             </div>
           </div>
         </div>
@@ -617,7 +699,7 @@
   <section class="relative py-20">
     <div class="mx-auto max-w-7xl px-4">
       <div class="grid items-center gap-10 md:grid-cols-2">
-        <img class="reveal w-full rounded-2xl border border-sage/20" src="https://images.unsplash.com/photo-1559136651-73a45393eabd?q=80&w=1200&auto=format&fit=crop" alt="Security" / loading="lazy" decoding="async">
+        <img class="reveal w-full rounded-2xl border border-sage/20" src="https://images.unsplash.com/photo-1559136651-73a45393eabd?q=80&w=1200&auto=format&fit=crop" alt="Security" loading="lazy" decoding="async">
         <div class="reveal">
           <h3 class="text-3xl font-extrabold">Security First</h3>
           <p class="mt-3 text-light/80">We use industry best-practices to protect your data and funds.</p>
